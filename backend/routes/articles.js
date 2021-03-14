@@ -1,6 +1,10 @@
 const express = require('express');
 
-router.get('/articles' getArticles);
+const router = express.Router();
+
+const { getArticles, createArticle, deleteArticle } = require('../controllers/users');
+
+router.get('/articles', getArticles);
 
 router.post('/articles', createArticle);
 
