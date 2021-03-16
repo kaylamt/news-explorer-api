@@ -9,6 +9,8 @@ const app = express();
 app.use(cors());
 app.use(helmet());
 
+const port = 3000;
+
 const articleRoutes = require('./routes/articles');
 const userRoutes = require('./routes/users');
 
@@ -31,3 +33,5 @@ app.post('/signin', celebrate({
 
 app.use('/articles', articleRoutes);
 app.use('/users', userRoutes);
+
+app.listen(port);
