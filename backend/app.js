@@ -1,8 +1,10 @@
 const express = require('express');
-const { celebrate, Joi } = require('celebrate');
+const { celebrate, Joi, errors } = require('celebrate');
 const helmet = require('helmet');
 const cors = require('cors');
 const { createUser, login } = require('./controllers/users');
+const error = require('./middleware/error');
+const { requestLogger, errorLogger } = require('./middleware/logger');
 
 const app = express();
 
@@ -15,6 +17,8 @@ const articleRoutes = require('./routes/articles');
 const userRoutes = require('./routes/users');
 
 app.use(express.json());
+
+app.use(requestLogger);
 
 app.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -33,5 +37,11 @@ app.post('/signin', celebrate({
 
 app.use('/articles', articleRoutes);
 app.use('/users', userRoutes);
+
+app.use(errorLogger);
+
+app.use(errors());
+
+app.use(error);
 
 app.listen(port);
