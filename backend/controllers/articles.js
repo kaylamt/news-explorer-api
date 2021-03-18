@@ -34,11 +34,11 @@ module.exports.createArticle = (req, res, next) => {
 };
 
 module.exports.deleteArticle = (req, res, next) => {
-  Article.findOneAndRemove({ _id: req.params.id, owner: req.user._id })
+  Article.findOneAndRemove({ _id: req.params.articleId, owner: req.user._id })
     .then((article) => {
       if (article) {
         return res.send(article);
-      } throw new NotFoundError('User not found');
+      } throw new NotFoundError('Article not found');
     })
     .catch(next);
 };
