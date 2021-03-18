@@ -9,6 +9,7 @@ module.exports.getArticles = (_req, res, next) => {
 
 module.exports.createArticle = (req, res, next) => {
   const {
+    keyword,
     title,
     text,
     date,
@@ -19,6 +20,7 @@ module.exports.createArticle = (req, res, next) => {
   const owner = req.user._id;
 
   Article.create({
+    keyword,
     title,
     text,
     date,
