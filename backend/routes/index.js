@@ -1,24 +1,13 @@
 const express = require('express');
 
 const router = express.Router();
-const { celebrate, Joi, errors } = require('celebrate');
-const helmet = require('helmet');
-const cors = require('cors');
+const { celebrate, Joi } = require('celebrate');
+
 const { createUser, login } = require('../controllers/users');
 const auth = require('../middleware/auth');
-const error = require('../middleware/error');
-const { requestLogger, errorLogger } = require('../middleware/logger');
 
 const articleRoutes = require('./articles');
 const userRoutes = require('./users');
-
-router.use(cors());
-
-router.use(helmet());
-
-router.use(express.json());
-
-router.use(requestLogger);
 
 router.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -39,12 +28,6 @@ router.use(auth);
 
 router.use('/articles', articleRoutes);
 router.use('/users', userRoutes);
-
-router.use(errorLogger);
-
-router.use(errors());
-
-router.use(error);
 
 router.use((_req, res) => {
   res.statusCode = 404;
