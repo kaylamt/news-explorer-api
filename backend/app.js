@@ -6,6 +6,7 @@ const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middleware/logger');
 const error = require('./middleware/error');
 const routes = require('./routes/index.js');
+// const limiter = require('./utils/rate-limiter.js');
 
 const port = 3000;
 

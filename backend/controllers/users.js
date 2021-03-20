@@ -46,7 +46,7 @@ module.exports.login = (req, res, next) => {
       res.cookie('token', token, { httpOnly: true });
       res.send({ token });
     })
-    .catch((err) => {
-      next(new UnauthorizedError(err.message));
+    .catch(() => {
+      next(new UnauthorizedError('Invalid login'));
     });
 };

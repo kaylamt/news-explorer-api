@@ -7,23 +7,24 @@
     "dev": "nodemon ./app.js"
   },
   "dependencies": {
+    "bcryptjs": "~2.4.3",
+    "celebrate": "~13.0.4",
     "cookie-parser": "~1.4.4",
+    "cors": "~2.8.5",
     "debug": "~2.6.9",
+    "dotenv": "~8.2.0",
     "express": "~4.16.1",
+    "express-winston": "~4.0.5",
     "helmet": "^4.4.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "joi": "~17.4.0",
+    "jsonwebtoken": "~8.5.1",
     "mongoose": "^5.11.12",
     "morgan": "~1.9.1",
-    "joi": "~17.4.0",
-    "celebrate": "~13.0.4",
-    "bcryptjs": "~2.4.3",
-    "jsonwebtoken": "~8.5.1",
+    "request-rate-limiter": "^2.0.3",
     "validator": "~13.5.2",
-    "winston": "~3.3.3",
-    "express-winston": "~4.0.5",
-    "cors": "~2.8.5",
-    "dotenv": "~8.2.0"
+    "winston": "~3.3.3"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
