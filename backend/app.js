@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use(helmet());
 
-mongoose.connect('mongodb://localhost:27017/newsexplorerdb', {
+mongoose.connect('process.env.mongodb://localhost:27017/newsexplorerdb', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
