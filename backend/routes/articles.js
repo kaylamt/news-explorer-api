@@ -20,6 +20,10 @@ router.post('/', celebrate({
   }),
 }), createArticle);
 
-router.delete('/:articleId', deleteArticle);
+router.delete('/:articleId', celebrate({
+  params: Joi.object().keys({
+    articleId: Joi.string().hex().length(24),
+  }),
+}), deleteArticle);
 
 module.exports = router;
