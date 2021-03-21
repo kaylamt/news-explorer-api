@@ -1,3 +1,5 @@
+const constants = require('../utils/constants');
+
 module.exports = (err, _req, res, next) => {
   const { statusCode = 500, message } = err;
 
@@ -5,7 +7,7 @@ module.exports = (err, _req, res, next) => {
     .status(statusCode)
     .send({
       message: statusCode === 500
-        ? 'An error occurred on the server'
+        ? constants.serverErr
         : message,
     });
 };

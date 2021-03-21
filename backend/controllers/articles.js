@@ -1,5 +1,6 @@
 const Article = require('../models/article');
 const NotFoundError = require('../errors/not-found-err');
+const constants = require('../utils/constants');
 
 module.exports.getArticles = (_req, res, next) => {
   Article.find({})
@@ -38,7 +39,7 @@ module.exports.deleteArticle = (req, res, next) => {
     .then((article) => {
       if (article) {
         return res.send(article);
-      } throw new NotFoundError('Article not found');
+      } throw new NotFoundError(constants.notFoundArticleErr);
     })
     .catch(next);
 };

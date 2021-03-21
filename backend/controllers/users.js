@@ -4,6 +4,7 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
 const UnauthorizedError = require('../errors/unauthorized-err');
 const ConflictError = require('../errors/conflict-err');
+const constants = require('../utils/constants');
 
 module.exports.createUser = (req, res, next) => {
   const {
@@ -19,7 +20,7 @@ module.exports.createUser = (req, res, next) => {
     .then((user) => res.send(user.toJSON()))
     .catch((err) => {
       if (err.name === 'MongoError' && err.code === 11000) {
-        return next(new ConflictError('Email address already taken'));
+        return next(new ConflictError(constants.conflictErr));
       }
       return next(err);
     });
@@ -30,7 +31,7 @@ module.exports.getCurrentUser = (req, res, next) => {
     .then((user) => {
       if (user) {
         return res.send(user);
-      } throw new NotFoundError('User not found');
+      } throw new NotFoundError(constants.notFoundUserErr);
     })
     .catch(next);
 };
@@ -47,6 +48,6 @@ module.exports.login = (req, res, next) => {
       res.send({ token });
     })
     .catch(() => {
-      next(new UnauthorizedError('Invalid login'));
+      next(new UnauthorizedError(constants.loginErr));
     });
 };
