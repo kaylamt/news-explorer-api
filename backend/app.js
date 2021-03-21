@@ -5,8 +5,9 @@ const helmet = require('helmet');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middleware/logger');
 const error = require('./middleware/error');
+const limiter = require('./middleware/limiter');
 const routes = require('./routes/index.js');
-// const limiter = require('./utils/rate-limiter.js');
+const config = require('./config');
 
 const port = 3000;
 
@@ -16,13 +17,18 @@ app.use(cors());
 
 app.use(helmet());
 
-mongoose.connect('process.env.mongodb://localhost:27017/newsexplorerdb', {
+const { NODE_ENV, MONGOOSE_URL } = process.env;
+const mongooseUrl = NODE_ENV === 'production' ? MONGOOSE_URL : config.mongooseUrl;
+
+mongoose.connect(mongooseUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
 
 app.use(express.json());
+
+app.use(limiter);
 
 app.use(routes);
 

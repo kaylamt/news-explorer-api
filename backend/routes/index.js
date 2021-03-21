@@ -9,7 +9,7 @@ const auth = require('../middleware/auth');
 const articleRoutes = require('./articles');
 const userRoutes = require('./users');
 
-router.post('/signup', celebrate({
+router.post('/api/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
@@ -17,7 +17,7 @@ router.post('/signup', celebrate({
   }),
 }), createUser);
 
-router.post('/signin', celebrate({
+router.post('/api/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
@@ -26,8 +26,8 @@ router.post('/signin', celebrate({
 
 router.use(auth);
 
-router.use('/articles', articleRoutes);
-router.use('/users', userRoutes);
+router.use('/api/articles', articleRoutes);
+router.use('/api/users', userRoutes);
 
 router.use((_req, res) => {
   res.statusCode = 404;

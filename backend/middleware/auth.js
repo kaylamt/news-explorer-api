@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const UnauthorizedError = require('../errors/unauthorized-err');
 require('dotenv').config();
+const config = require('../config');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
@@ -13,7 +14,7 @@ module.exports = (req, res, next) => {
   let payload;
 
   const { NODE_ENV, JWT_SECRET } = process.env;
-  const secretKey = NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key';
+  const secretKey = NODE_ENV === 'production' ? JWT_SECRET : config.jwtSecret;
 
   try {
     payload = jwt.verify(token, secretKey);
