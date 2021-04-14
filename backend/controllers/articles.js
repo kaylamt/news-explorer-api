@@ -2,8 +2,8 @@ const Article = require('../models/article');
 const NotFoundError = require('../errors/not-found-err');
 const constants = require('../utils/constants');
 
-module.exports.getArticles = (_req, res, next) => {
-  Article.find({})
+module.exports.getArticles = (req, res, next) => {
+  Article.find({ owner: req.user._id })
     .then((article) => res.send(article))
     .catch(next);
 };

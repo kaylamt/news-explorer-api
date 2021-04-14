@@ -6,6 +6,7 @@ const constants = require('../utils/constants');
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
+  console.log('lajdl;kj', req.headers);
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
     return next(new UnauthorizedError(constants.unauthorizedErr));
